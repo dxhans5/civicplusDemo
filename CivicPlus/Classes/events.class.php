@@ -28,6 +28,7 @@ class Events extends APIConsumer {
                 'endDate' => $end
             ]
         ];
+
         $response = $this->client->post(Configuration::RequestUrlPrefix . self::ENDPOINT, $data);
         $body = json_decode($response->getBody());
     }

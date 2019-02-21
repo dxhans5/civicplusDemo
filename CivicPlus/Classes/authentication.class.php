@@ -35,7 +35,7 @@ class Authentication extends APIConsumer {
         $response = $this->send('POST', Configuration::RequestUrlPrefix . self::ENDPOINT, $data);
 
         // Store the token to be used in other API calls
-        $this->token = $response->access_token;
+        // Need to put this in the $_SESSION
 
         return json_encode([
             'access_token' => $response->access_token,

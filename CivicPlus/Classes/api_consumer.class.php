@@ -16,9 +16,7 @@ use GuzzleHttp\Client;
  */
 abstract class APIConsumer {
     private static $instance;
-
     protected $client;
-    protected $token;
 
     public function __construct() {
         $this->client = new Client(['base_uri' => Configuration::Domain . Configuration::RequestUrlPrefix]);
@@ -37,12 +35,7 @@ abstract class APIConsumer {
         return $instances[$calledClass];
     }
 
-    protected function setToken(String $token) {
-        $this->token = $response->access_token;
-    }
-
     protected function send(String $method, String $url, Array $data) {
-        print_r("Token: " . $this->token);
         switch($method) {
             case 'POST':
                 $response = $this->client->post($url, $data);
