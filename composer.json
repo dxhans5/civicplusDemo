@@ -1,0 +1,12 @@
+{
+    "name": "donaldhansen/civicplus",
+    "description": "Code demonstration for CivicPlus",
+    "type": "project",
+    "authors": [{
+        "name": "donaldhansen",
+        "email": "dxhans5@gmail.com"
+    }],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}
