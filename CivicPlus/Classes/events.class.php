@@ -21,6 +21,9 @@ class Events extends APIConsumer {
 
     public function addEvent(String $title, String $desc, String $start, String $end) {
         $data = [
+            'headers' => [
+                'Authorization' => $_SESSION['token']
+            ],
             'json' => [
                 'title' => $title,
                 'description' => $desc,
@@ -29,8 +32,33 @@ class Events extends APIConsumer {
             ]
         ];
 
-        $response = $this->client->post(Configuration::RequestUrlPrefix . self::ENDPOINT, $data);
-        $body = json_decode($response->getBody());
+        return json_encode($this->send('POST', Configuration::RequestUrlPrefix . self::ENDPOINT, $data));
+    }
+
+    public function getEvents(Array $options = null) {
+        $data = [
+            'headers' => [
+                'Authorization' => $_SESSION['token']
+            ]
+        ];
+
+        if(!empty($options)) {
+            foreach($options as $optionKey => $optionVal) {
+                $data['json'][$optionKey] = $optionVal;
+            }
+        }
+
+        return json_encode($this->send('GET', Configuration::RequestUrlPrefix . self::ENDPOINT, $data));   
+    }
+
+    public function getEvent(String $eventID) {
+        $data = [
+            'headers' => [
+                'Authorization' => $_SESSION['token']
+            ]
+        ];
+
+        return json_encode($this->send('GET', Configuration::RequestUrlPrefix . self::ENDPOINT . '/' . $eventID, $data));   
     }
 
     
